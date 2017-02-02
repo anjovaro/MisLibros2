@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivLibro"
+        android:src="@drawable/libro1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:scaleType="fitCenter"
+        android:layout_alignBottom="@+id/rbNota"
+        android:contentDescription="@string/imageViewLibro"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tvTitulo"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivLibro"
+        android:layout_toEndOf="@+id/ivLibro"
+        android:hint="@string/hintTitulo"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvAutor"
+        android:layout_below="@+id/tvTitulo"
+        android:layout_alignStart="@+id/tvTitulo"
+        android:hint="@string/hintAutor"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:gravity="end"
+        android:layout_alignParentRight="false"
+        android:layout_alignLeft="@+id/tvTitulo" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rbNota"
+        android:layout_alignLeft="@+id/tvAutor"
+        android:layout_alignStart="@+id/tvAutor"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:layout_below="@+id/tvAutor"
+        android:layout_toEndOf="@id/ivLibro"
+        android:rating="2"
+        style="?android:attr/ratingBarStyle"
+        android:layout_toRightOf="@id/ivLibro"
+        android:isIndicator="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        />
+        <!-- isIndicator hace que la ratingbar sólo sea para mostrar y no se pueda modificar por el usuario -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tvID"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/rbNota"
+        android:layout_toEndOf="@+id/rbNota"
+        android:visibility="gone" />
+
+</RelativeLayout>

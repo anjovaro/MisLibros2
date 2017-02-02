@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Mis Libros</string>
+    <string name="action_settings">Actualizar</string>
+    <string name="lblTitulo">Título: </string>
+    <string name="etTitulo"/>
+    <string name="hintTitulo">Título del libro</string>
+    <string name="lblAutor">Autor: </string>
+    <string name="etAutor"/>
+    <string name="hintAutor">Autor del libro</string>
+    <string name="lblEditorial">Editorial:</string>
+    <string name="etEditorial"/>
+    <string name="hintEditorial">Editorial de la obra</string>
+    <string name="lblISBN">I.S.B.N:</string>
+    <string name="hitntISBN">I.S.B.N. del libro</string>
+    <string name="lblPaginas">Páginas: </string>
+    <string name="etPaginas">0</string>
+    <string name="hintPaginas">Páginas</string>
+    <string name="lblAnio">Año: </string>
+    <string name="etAnio">0</string>
+    <string name="hintAnio">Año</string>
+    <string name="cbEbbok">eBook</string>
+    <string name="cbLeido">Leído</string>
+    <string name="lblResumen">Resumen:</string>
+    <string name="notexto">Sin libros que mostrar</string>
+    <string name="action_grabar">Grabar</string>
+    <string name="action_actualizar">Actualizar</string>
+    <string name="action_borrar">Borrar</string>
+    <string name="imageViewLibro">Imagen de Libro</string>
+    <string name="noLibro">No se ha encontrado libro</string>
+</resources>
