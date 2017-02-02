@@ -1,5 +1,5 @@
 package hlc.daw2.antonio.mislibros;
-
+@SuppressWarnings("WeakerAccess")
 /**
  * Created by Antonio on 28/01/2016.
  * creo el objeto libro
@@ -9,7 +9,7 @@ package hlc.daw2.antonio.mislibros;
  * @param isbn es el I.S.B.N. del libro
  * .... son autoexplicativas
  */
-public class Libro {
+ public class Libro {
     //private int    _id;          // campo identificador de fila
     private String titulo;       // título del libro
     private String autor;        // autor del libro
@@ -22,7 +22,7 @@ public class Libro {
     private float  nota = 0;     // valor para la ratingbar
     private String resumen;      // resumen o comentario sobre el libro
 
-    public Libro(String titulo, String autor, String editorial, String isbn,
+     public Libro(String titulo, String autor, String editorial, String isbn,
                  int paginas, int anio, int ebook, int leido, float nota, String resumen){
         this.titulo = titulo;
         this.autor = autor;

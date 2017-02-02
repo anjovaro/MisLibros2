@@ -4,15 +4,18 @@
 
 package hlc.daw2.antonio.mislibros;
 
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,7 +25,7 @@ import java.util.Locale;
 
 //import android.support.v4.app.FragmentManager;
 
-public class VistaLibro extends AppCompatActivity {
+public class VistaLibro extends Fragment {
     TextView titulo;
     TextView autor;
     TextView editorial;
@@ -35,15 +38,15 @@ public class VistaLibro extends AppCompatActivity {
     TextView resumen;
     static final String TAG = "VistaLibro";
     int registro;   // registro a tratar
-    DBAdapter db = new DBAdapter(this);
+    DBAdapter db = new DBAdapter(getActivity().getBaseContext());
     boolean grabar, borrar, modificar;
 
     Menu menu;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vista_libro);
+    public View onCreateView(LayoutInflater inflater, ViewGroup contenedor, Bundle savedInstanceState) {
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_vista_libro);
         titulo = (TextView) findViewById(R.id.titulo);
         autor = (TextView) findViewById(R.id.autor);
         editorial = (TextView) findViewById(R.id.editorial);
@@ -107,6 +110,7 @@ public class VistaLibro extends AppCompatActivity {
             } else titulo.setText(R.string.noLibro);
             db.close();
         }
+        return inflater.inflate(R.layout.activity_vista_libro, contenedor, false);
     }
 public boolean onPrepareOptionsMenu(Menu menu){
     menu.findItem(R.id.action_grabar).setVisible(grabar);
