@@ -38,7 +38,7 @@ public class VistaLibro extends Fragment {
     TextView resumen;
     static final String TAG = "VistaLibro";
     int registro;   // registro a tratar
-    DBAdapter db = new DBAdapter(getActivity().getBaseContext());
+    DBAdapter db = new DBAdapter(getActivity().getApplication());
     boolean grabar, borrar, modificar;
 
     Menu menu;
@@ -47,24 +47,29 @@ public class VistaLibro extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup contenedor, Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_vista_libro);
-        titulo = (TextView) findViewById(R.id.titulo);
-        autor = (TextView) findViewById(R.id.autor);
-        editorial = (TextView) findViewById(R.id.editorial);
-        isbn = (TextView) findViewById(R.id.isbn);
-        paginas = (TextView) findViewById(R.id.paginas);
-        anio = (TextView) findViewById(R.id.anio);
-        ebook = (CheckBox) findViewById(R.id.ebook);
-        leido = (CheckBox) findViewById(R.id.leido);
-        nota = (RatingBar) findViewById(R.id.nota);
-        resumen = (TextView) findViewById(R.id.resumen);
+        View vista= inflater.inflate(R.layout.activity_vista_libro, contenedor, false);
+
+   /* @Override
+    public void onStart(){
+        super.onStart();*/
+        titulo      = (TextView) vista.findViewById(R.id.titulo);
+        autor       = (TextView) vista.findViewById(R.id.autor);
+        editorial   = (TextView) vista.findViewById(R.id.editorial);
+        isbn        = (TextView) vista.findViewById(R.id.isbn);
+        paginas     = (TextView) vista.findViewById(R.id.paginas);
+        anio        = (TextView) vista.findViewById(R.id.anio);
+        ebook       = (CheckBox) vista.findViewById(R.id.ebook);
+        leido       = (CheckBox) vista.findViewById(R.id.leido);
+        nota        = (RatingBar) vista.findViewById(R.id.nota);
+        resumen     = (TextView) vista.findViewById(R.id.resumen);
         // recupero los datos del bundle recibido por la actividad
-        Bundle extra = getIntent().getExtras();
+        Bundle extra = getActivity().getIntent().getExtras();
         registro = (int) extra.getLong("registro");
         // si el número de reistro es 0, hay que añadir un nuevo libro, en caso contrario se pasará
         // a editarlo para modificarlo o borrarlo si se desea.
         if (registro == 0) {  //tengo que añadir un nuevo libro
             Log.d(TAG, "Se crea nuevo libro");
-            Toast.makeText(this, "Introduce los datos del nuevo libro,\ndespués pulsa el botón de grabar", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Introduce los datos del nuevo libro,\ndespués pulsa el botón de grabar", Toast.LENGTH_LONG).show();
             grabar = true;
             borrar = false;
             modificar = false;
@@ -110,18 +115,18 @@ public class VistaLibro extends Fragment {
             } else titulo.setText(R.string.noLibro);
             db.close();
         }
-        return inflater.inflate(R.layout.activity_vista_libro, contenedor, false);
+        return vista;
     }
-public boolean onPrepareOptionsMenu(Menu menu){
-    menu.findItem(R.id.action_grabar).setVisible(grabar);
-    menu.findItem(R.id.action_borrar).setVisible(borrar);
-    menu.findItem(R.id.action_actualizar).setVisible(modificar);
-    return true;
-}
-    @Override
+    public void onPrepareOptionsMenu(Menu menu){
+        menu.findItem(R.id.action_grabar).setVisible(grabar);
+        menu.findItem(R.id.action_borrar).setVisible(borrar);
+        menu.findItem(R.id.action_actualizar).setVisible(modificar);
+        //return true;
+    }
+    //@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_vista_libro, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_vista_libro, menu);
         return true;
     }
     @Override
@@ -146,11 +151,11 @@ public boolean onPrepareOptionsMenu(Menu menu){
                             (ebook.isChecked() ? 1 : 0),
                             (leido.isChecked() ? 1 : 0),
                             nota.getRating(), resumen.getText().toString()); */
-                    Toast.makeText(this, "Insertado libro " + titulo.getText().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getBaseContext(), "Insertado libro " + titulo.getText().toString(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "No se ha podido insertar libro sin título y/o autor", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getBaseContext(), "No se ha podido insertar libro sin título y/o autor", Toast.LENGTH_LONG).show();
                 }
-                finish();
+                getActivity().finish();
                 break;
             case R.id.action_actualizar:
                 String mensaje = "¿Quieres actualizar el libro "+"<strong>"+
@@ -175,14 +180,14 @@ public boolean onPrepareOptionsMenu(Menu menu){
      * @return la ventana modal
      */
     private AlertDialog crearDialogoModal(String titulo, String mensaje, final String operacion) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity().getBaseContext());
         alertDialogBuilder.setTitle(titulo);
         alertDialogBuilder.setMessage(Html.fromHtml(mensaje)); // permite formatear el código con html
         // OnClickListener para Cancelar
         DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Operación cancelada", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getBaseContext(), "Operación cancelada", Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
         };
@@ -211,12 +216,12 @@ public boolean onPrepareOptionsMenu(Menu menu){
                     Integer.parseInt(anio.getText().toString()),
                     (ebook.isChecked() ? 1 : 0), (leido.isChecked() ? 1 : 0),
                     nota.getRating(), resumen.getText().toString());
-            Toast.makeText(this, "Libro "+titulo.getText().toString()+" actualizado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getBaseContext(), "Libro "+titulo.getText().toString()+" actualizado.", Toast.LENGTH_LONG).show();
         } else if (operacion.equals("borrar")) {
             db.borraLibro(registro);
-            Toast.makeText(this, "Eliminado el libro: \n" + titulo.getText().toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getBaseContext(), "Eliminado el libro: \n" + titulo.getText().toString(), Toast.LENGTH_LONG).show();
         }
-        finish();
+        getActivity().finish();
     }
 
     public void onStop() {
