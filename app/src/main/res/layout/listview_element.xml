@@ -27,7 +27,8 @@
         android:layout_toRightOf="@+id/ivLibro"
         android:layout_toEndOf="@+id/ivLibro"
         android:hint="@string/hintTitulo"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +43,8 @@
         android:layout_centerHorizontal="true"
         android:gravity="end"
         android:layout_alignParentRight="false"
-        android:layout_alignLeft="@+id/tvTitulo" />
+        android:layout_alignLeft="@+id/tvTitulo"
+        android:textSize="12sp"/>
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -51,7 +53,7 @@
         android:layout_alignLeft="@+id/tvAutor"
         android:layout_alignStart="@+id/tvAutor"
         android:numStars="5"
-        android:stepSize="0.1"
+        android:stepSize="0.2"
         android:layout_below="@+id/tvAutor"
         android:layout_toEndOf="@id/ivLibro"
         android:rating="2"

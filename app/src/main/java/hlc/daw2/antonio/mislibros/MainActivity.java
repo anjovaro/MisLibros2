@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Intent intencion = new Intent(MainActivity.this,VistaLibro.class);
                 intencion.putExtra("registro",0);
                 // lanzo la actividad de alta de registros
+                // todo lanzo el fragmento de alta de registros
                 startActivity(intencion);
             }
         });
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         b.putLong("registro",l);
         //intencion.putExtra("registro", posicion);
         intencion.putExtras(b);
+        //todo hay que lanzar el fragmento con la vista del libro no la actividad. esto da problemas que hay que resolver
         startActivity(intencion);
     }
     @Override

@@ -38,20 +38,21 @@ public class VistaLibro extends Fragment {
     TextView resumen;
     static final String TAG = "VistaLibro";
     int registro;   // registro a tratar
-    DBAdapter db = new DBAdapter(getActivity().getApplication());
+    DBAdapter db; // = new DBAdapter(getActivity().getApplicationContext());       //getActivity().getApplication());
     boolean grabar, borrar, modificar;
-
+    View vista;
     Menu menu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup contenedor, Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_vista_libro);
-        View vista= inflater.inflate(R.layout.activity_vista_libro, contenedor, false);
+        vista = inflater.inflate(R.layout.activity_vista_libro, contenedor, false);
+        return vista;
+    }
 
-   /* @Override
-    public void onStart(){
-        super.onStart();*/
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         titulo      = (TextView) vista.findViewById(R.id.titulo);
         autor       = (TextView) vista.findViewById(R.id.autor);
         editorial   = (TextView) vista.findViewById(R.id.editorial);
@@ -62,6 +63,10 @@ public class VistaLibro extends Fragment {
         leido       = (CheckBox) vista.findViewById(R.id.leido);
         nota        = (RatingBar) vista.findViewById(R.id.nota);
         resumen     = (TextView) vista.findViewById(R.id.resumen);
+
+        // asigno la base de datos
+        db = new DBAdapter(getActivity().getBaseContext());
+
         // recupero los datos del bundle recibido por la actividad
         Bundle extra = getActivity().getIntent().getExtras();
         registro = (int) extra.getLong("registro");
@@ -115,7 +120,7 @@ public class VistaLibro extends Fragment {
             } else titulo.setText(R.string.noLibro);
             db.close();
         }
-        return vista;
+        //return vista;
     }
     public void onPrepareOptionsMenu(Menu menu){
         menu.findItem(R.id.action_grabar).setVisible(grabar);
