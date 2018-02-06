@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-//import android.support.v4.app.FragmentManager;
+//import android.app.Fragment;
 
 public class VistaLibro extends Fragment {
     TextView titulo;
