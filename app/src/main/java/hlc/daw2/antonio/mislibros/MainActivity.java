@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         actualizarVista();
     }
     /**
-     * inicializamos los datos de la base de datos si está vacía con dos regisatroa de prueba
+     * inicializamos los datos de la base de datos si está vacía con dos registros de prueba
      */
     public void inicializaDatos(){
         db.openW();
